@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Укротитель ссылок</title>
+	<style>
+		body {
+			border: 1px solid black;
+			width: 400px;
+			margin: 200px auto;
+		}
+
+		a {
+			text-decoration: none;
+			color: black;
+		}
+
+		.header__title {
+			text-align: center;
+		}
+
+		.header__text {
+			text-align: center;
+		}
+
+		.shortener__wrapper {
+			padding: 20px;
+		}
+
+		.shortener__form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.shortener__label {
+			margin-bottom: 10px;
+		}
+
+		.shortener__input {
+			border: 1px solid rgba(0, 0, 0, 0.356);
+			margin-bottom: 10px;
+			border-radius: 5px;
+			height: 20px;
+		}
+
+		.shortener__btn {
+			margin: 0 auto;
+			width: 200px;
+			height: 50px;
+			cursor: pointer;
+		}
+
+		.shortener__res {
+			text-align: center;
+		}
+
+		.shortener__link {
+			padding: 5px;
+			border-bottom: 1px solid transparent;
+			transition: all 0.2s;
+		}
+
+		.shortener__link:hover {
+			color: red;
+			border-bottom: 1px solid red;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1 class="header__title">
+			Мега сократитель ссылок!!!
+		</h1>
+		<p class="header__text">
+			Введите ссылку, которую хотите сократить.
+		</p>
+	</header>
+
+
+	<section class="shortener" id="urlForm">
+		<div class="shortener__wrapper">
+			<form class="shortener__form" action="/shorten" enctype="application/x-www-form-urlencoded" method="post">
+				<label class="shortener__label" for="url">Ссылка</label>
+				<input class="shortener__input" type="url" name="url">
+				<button class="shortener__btn" type="submit">Сократить ссылку</button>
+				<p class="shortener__res" id="urlResult"></p>
+			</form>
+		</div>
+	</section>
+
+	<script>
+		let data = window.location.hash;
+		if (data) {
+
+			let url = new URL(data.substr(1));
+
+			if (url.protocol === window.location.protocol
+				&& url.host === window.location.host) {
+				let section = document.getElementById('urlResult');
+				section.innerHTML = `<a class="shortener__link" id="link" href="${url}">${url}</a>`;
+			}
+		}
+
+	</script>
+</body>
+
+</html>
